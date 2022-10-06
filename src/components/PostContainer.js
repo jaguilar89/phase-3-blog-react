@@ -6,7 +6,7 @@ export default function PostContainer() {
     return (
         <div id="post-container">
             <p>Post Container</p>
-            {Array(10).fill(<div><Link>Link to blog post (with title, description, and date of post)</Link></div>)}
+            {Array(10).fill(<div><Link to='/posts/1'>Link to blog post (with title, description, and date of post)</Link></div>)}
         </div>
     )
 }

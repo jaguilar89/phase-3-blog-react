@@ -10,6 +10,15 @@
 .post {
   border: 1px solid black;
   margin: auto;
+  margin-top: 50px;
   background: yellowgreen;
   width: 800px;
+}
+
+#comment-container {
+  border: 1px solid black;
+  margin: auto;
+  background: lightblue;
+  width: 800px;
+  margin-top: 50px;
 }
