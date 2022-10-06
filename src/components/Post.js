@@ -3,7 +3,7 @@ import React from "react";
 export default function Post() {
     return (
         <div className="post">
-            <p>blog post</p>
+            <p>link to blog post</p>
         </div>
     )
 }
