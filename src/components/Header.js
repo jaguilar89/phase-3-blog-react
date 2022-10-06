@@ -1,9 +1,11 @@
 import React from "react";
+import NavBar from "./NavBar";
 
 export default function Header() {
     return (
         <header>
-            <h1>Name Pending</h1>
+            <h1>Blog Name</h1>
+            <NavBar />
         </header>
     )
 }
