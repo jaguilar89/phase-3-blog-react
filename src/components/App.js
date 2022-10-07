@@ -10,13 +10,11 @@ export default function App() {
     <div className='App'>
       <Header />
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/posts/:id' element={<Post />} />
+        <Route path='*' element={<Home />} />
       </Routes>
     </div>
   )
 };
 
-// <Route path='posts/:id' element={<Post />} />
 
 
