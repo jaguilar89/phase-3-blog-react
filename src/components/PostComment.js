@@ -4,7 +4,6 @@ import { Button, Comment, Form, Header } from 'semantic-ui-react'
 export default function PostComment() {
     return (
         <>
-        <Header size="huge">Comments</Header>
             <Comment.Group>
                 <Comment>
                     <Comment.Content>

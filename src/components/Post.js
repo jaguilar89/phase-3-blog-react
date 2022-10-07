@@ -1,12 +1,12 @@
 import React from "react";
 import CommentContainer from "./CommentContainer";
-import { Container, Header } from "semantic-ui-react";
+import { Container, Header, Button } from "semantic-ui-react";
 
 export default function Post() {
     return (
         <div className="post">
             <Container text>
-                <Header as='h2'>Title</Header>
+                <Header as='h1'>Title</Header>
                 <p>
                     Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
                     ligula eget dolor. Aenean massa strong. Cum sociis natoque penatibus et
@@ -35,7 +35,10 @@ export default function Post() {
                     viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.
                     Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.
                 </p>
+            <Button content='Edit Post' labelPosition='left' icon='edit' secondary />
+            <Button content='Delete Post' labelPosition='left' icon='trash' secondary />
             </Container>
+            <Header size="huge">Comments</Header>
             <CommentContainer />
         </div>
     )
