@@ -6,9 +6,8 @@ export default function NavBar() {
         <nav>
             <ul>
                 <li>
-                    <NavLink to="home">Home</NavLink>
-                    <NavLink>Navbar link</NavLink>
-                    <NavLink>Navbar link</NavLink>
+                    <NavLink to="/">Home</NavLink>
+                    <NavLink to="about">About</NavLink>
                 </li>
             </ul>
         </nav>
