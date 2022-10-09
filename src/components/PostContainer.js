@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Post from "./Post";
+import NewPostForm from "./NewPostForm";
 import { Link } from "react-router-dom";
-
 import { Header, Button } from "semantic-ui-react";
 
 export default function PostContainer() {
     // state for posts goes here
     const [posts, setPosts] = useState([])
+    const [formIsShown, setFormIsShown] = useState(false)
 
     useEffect(() => {
         (async () => {
@@ -15,6 +15,10 @@ export default function PostContainer() {
             setPosts(data)
         })()
     }, [])
+    
+    function handleShowForm() {
+        setFormIsShown((formIsShown) => !formIsShown)
+    }
 
     const displayedPosts = posts.map((post) => (
         <li key={post.id}>
@@ -33,7 +37,8 @@ export default function PostContainer() {
     return (
         <div id="post-container">
             <Header size="huge">Post Container</Header>
-            <Button content='Add new post' labelPosition='left' icon='pencil alternate' primary />
+            <Button content={formIsShown ? 'Close' : 'Add New Post'} labelPosition='left' icon='pencil alternate' primary onClick={handleShowForm}/>
+            {formIsShown && <NewPostForm setPosts={setPosts} />}
             {displayedPosts}
         </div>
     )
