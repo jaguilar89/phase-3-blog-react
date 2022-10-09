@@ -6,7 +6,7 @@ export default function CommentForm() {
         <Comment.Group>
             <Form reply>
                 <Form.TextArea />
-                <Button content='Add Comment' labelPosition='left' icon='pencil alternate icon' primary />
+                <Button content='Add Comment' labelPosition='left' icon='pencil alternate' primary />
             </Form>
         </Comment.Group>
     )

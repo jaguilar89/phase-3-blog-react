@@ -7,6 +7,7 @@ export default function Post() {
     const { title } = useParams();
     const location = useLocation();
     const { postTitle, body } = location.state;
+    console.log('hello from Post.js')
 
     return (
         <div className="post">
@@ -20,6 +21,7 @@ export default function Post() {
                 <Button content='Delete Post' labelPosition='left' icon='trash' secondary />
             </Container>
             <Header size="huge">Comments</Header>
+            
             <CommentContainer />
         </div>
     )

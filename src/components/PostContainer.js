@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Post from "./Post";
-import { generatePath, Link } from "react-router-dom";
-import { Routes, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { Header, Button } from "semantic-ui-react";
 
@@ -20,7 +19,7 @@ export default function PostContainer() {
     const displayedPosts = posts.map((post) => (
         <li key={post.id}>
             <Link to=
-                {`/posts/${post.title}`}
+                {`/posts/${post.id}`}
                 state={{
                     postTitle: post.title,
                     body: post.body
@@ -33,12 +32,8 @@ export default function PostContainer() {
 
     return (
         <div id="post-container">
-            <Routes>
-                <Route path='/posts/:title' element={<Post />} />
-            </Routes>
-
             <Header size="huge">Post Container</Header>
-            <Button content='Add new post' labelPosition='left' icon='pencil alternate icon' primary />
+            <Button content='Add new post' labelPosition='left' icon='pencil alternate' primary />
             {displayedPosts}
         </div>
     )
