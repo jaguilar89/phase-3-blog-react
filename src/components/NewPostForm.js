@@ -1,8 +1,7 @@
-import { ErrorResponse } from "@remix-run/router";
 import React, { useState } from "react";
 import { Container } from "semantic-ui-react";
 
-export default function NewPostForm({ setPosts }) {
+export default function NewPostForm({ onSubmitPost }) {
     const form = {
         title: "",
         body: ""
@@ -12,7 +11,7 @@ export default function NewPostForm({ setPosts }) {
 
     function handleChange(e) {
         e.preventDefault();
-        const {name, value} = e.target;
+        const { name, value } = e.target;
         setFormData({
             ...formData,
             [name]: value
@@ -30,27 +29,29 @@ export default function NewPostForm({ setPosts }) {
                 body: JSON.stringify(formData)
             })
             const newPost = await res.json();
-            setPosts(newPost)
-        } catch(error) {
+            onSubmitPost(newPost)
+        } catch (error) {
             console.log(error)
         }
-    }
+        e.target.reset();
+    };
+
     return (
         <>
             <Container>
-                <form class="ui form">
+                <form class="ui form" onSubmit={handleSubmit}>
                     <div class="field">
                         <label>Title</label>
-                        <input type="text" name="title" placeholder="Title" onChange={handleChange}/>
+                        <input type="text" name="title" placeholder="Title" onChange={handleChange} />
                     </div>
+                    <div class="ui form">
+                        <div class="field">
+                            <label>Body</label>
+                            <textarea name='body' style={{ height: '300px' }} onChange={handleChange}></textarea>
+                        </div>
+                    </div>
+                    <button class="ui submit button" type="submit">Submit</button>
                 </form>
-                <div class="ui form">
-                    <div class="field">
-                        <label>Body</label>
-                        <textarea name='body' style={{ height: '300px' }} onChange={handleChange}></textarea>
-                    </div>
-                </div>
-                <button class="ui submit button" type="submit" onSubmit={handleSubmit}>Submit</button>
             </Container>
         </>
     )

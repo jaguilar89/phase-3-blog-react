@@ -11,13 +11,18 @@ export default function PostContainer() {
     useEffect(() => {
         (async () => {
             const res = await fetch('http://localhost:9292/posts')
-            const data = await res.json()
-            setPosts(data)
+            const postList = await res.json()
+            setPosts(postList)
         })()
     }, [])
     
     function handleShowForm() {
         setFormIsShown((formIsShown) => !formIsShown)
+    }
+
+    function handleAddPost(newPost) {
+        setPosts([...posts, newPost])
+        handleShowForm()
     }
 
     const displayedPosts = posts.map((post) => (
@@ -38,7 +43,7 @@ export default function PostContainer() {
         <div id="post-container">
             <Header size="huge">Post Container</Header>
             <Button content={formIsShown ? 'Close' : 'Add New Post'} labelPosition='left' icon='pencil alternate' primary onClick={handleShowForm}/>
-            {formIsShown && <NewPostForm setPosts={setPosts} />}
+            {formIsShown && <NewPostForm onSubmitPost={handleAddPost} />}
             {displayedPosts}
         </div>
     )
