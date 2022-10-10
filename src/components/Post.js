@@ -1,25 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import CommentContainer from "./CommentContainer";
 import { Container, Header, Button } from "semantic-ui-react";
 import { useLocation, useParams } from "react-router-dom";
-import { EditText, EditTextarea } from 'react-edit-text';
-import 'react-edit-text/dist/index.css';
 
 export default function Post() {
     const { id } = useParams();
     const location = useLocation();
-    const { postTitle, body } = location.state;
+    const { postTitle, postBody } = location.state;
+    const [inEditMode, setInEditMode] = useState(false)
+    const [editedBody, setEditedBody] = useState({ body: postBody })
+    
+    function handleClickEditPost() {
+        setInEditMode((inEditMode) => !inEditMode)
+    }
+
+    function handleSubmitChange() {
+        setEditedBody()
+    }
+    function handleChange(e) {
+        const { name, value } = e.target;
+        setEditedBody({
+            ...editedBody,
+            [name]: value
+        })
+    }
 
     return (
         <div className="post">
             <Container text>
                 <Header as='h1'>{postTitle}</Header>
                 <p>
-                    {body}
+                    {inEditMode ?
+                        <textarea
+                            name='body'
+                            style={{ height: '650px', width: '800px' }}
+                            contentEditable={true}
+                            defaultValue={postBody}
+                            onChange={handleChange}
+                        />
+                        :
+                        postBody
+                    }
                 </p>
             </Container>
-            <Button content='Edit Post' labelPosition='left' icon='edit' secondary />
+            <Button content={inEditMode ? 'Submit Changes' : 'Edit'} labelPosition='left' icon='edit' primary onClick={handleClickEditPost} />
+            {inEditMode && <Button content='Cancel Edit' labelPosition='left' icon='cancel' secondary onClick={handleClickEditPost} />}
             <Button content='Delete Post' labelPosition='left' icon='trash' secondary />
+
             <Header size="huge">Comments</Header>
 
             <CommentContainer />

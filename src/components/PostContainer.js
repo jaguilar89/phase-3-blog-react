@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import NewPostForm from "./NewPostForm";
+import Post from "./Post";
 import { Link } from "react-router-dom";
 import { Header, Button } from "semantic-ui-react";
 
@@ -15,7 +17,7 @@ export default function PostContainer() {
             setPosts(postList)
         })()
     }, [])
-    
+
     function handleShowForm() {
         setFormIsShown((formIsShown) => !formIsShown)
     }
@@ -31,7 +33,7 @@ export default function PostContainer() {
                 {`/posts/${post.id}`}
                 state={{
                     postTitle: post.title,
-                    body: post.body
+                    postBody: post.body
                 }}
             >
                 {post.title}
@@ -42,7 +44,7 @@ export default function PostContainer() {
     return (
         <div id="post-container">
             <Header size="huge">Post Container</Header>
-            <Button content={formIsShown ? 'Close' : 'Add New Post'} labelPosition='left' icon='pencil alternate' primary onClick={handleShowForm}/>
+            <Button content={formIsShown ? 'Close' : 'Add New Post'} labelPosition='left' icon='pencil alternate' primary onClick={handleShowForm} />
             {formIsShown && <NewPostForm onSubmitPost={handleAddPost} />}
             {displayedPosts}
         </div>

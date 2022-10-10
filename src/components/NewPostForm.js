@@ -33,7 +33,6 @@ export default function NewPostForm({ onSubmitPost }) {
         } catch (error) {
             console.log(error)
         }
-        e.target.reset();
     };
 
     return (
