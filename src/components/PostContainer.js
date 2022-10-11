@@ -1,22 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import NewPostForm from "./NewPostForm";
 import Post from "./Post";
 import { Link } from "react-router-dom";
 import { Header, Button } from "semantic-ui-react";
 
-export default function PostContainer() {
-    // state for posts goes here
-    const [posts, setPosts] = useState([])
+export default function PostContainer({ posts, setPosts }) {
     const [formIsShown, setFormIsShown] = useState(false)
-
-    useEffect(() => {
-        (async () => {
-            const res = await fetch('http://localhost:9292/posts')
-            const postList = await res.json()
-            setPosts(postList)
-        })()
-    }, [])
 
     function handleShowForm() {
         setFormIsShown((formIsShown) => !formIsShown)
@@ -32,6 +22,7 @@ export default function PostContainer() {
             <Link to=
                 {`/posts/${post.id}`}
                 state={{
+                    postID: post.id,
                     postTitle: post.title,
                     postBody: post.body
                 }}

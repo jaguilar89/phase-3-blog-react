@@ -3,20 +3,36 @@ import CommentContainer from "./CommentContainer";
 import { Container, Header, Button } from "semantic-ui-react";
 import { useLocation, useParams } from "react-router-dom";
 
-export default function Post() {
+export default function Post({ posts, setPosts }) {
     const { id } = useParams();
     const location = useLocation();
-    const { postTitle, postBody } = location.state;
+    const { postID, postTitle, postBody } = location.state;
     const [inEditMode, setInEditMode] = useState(false)
     const [editedBody, setEditedBody] = useState({ body: postBody })
-    
+
     function handleClickEditPost() {
         setInEditMode((inEditMode) => !inEditMode)
     }
 
-    function handleSubmitChange() {
-        setEditedBody()
+    async function handleSubmitChange(e) {
+        e.preventDefault();
+        try {
+            (async () => {
+                const res = await fetch(`http://localhost:9292/posts/${postID}`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(editedBody)
+                })
+                const updatedPost = await res.json();
+
+            })()
+        } catch(error) {
+            console.log(error)
+        }
     }
+
     function handleChange(e) {
         const { name, value } = e.target;
         setEditedBody({
@@ -43,7 +59,7 @@ export default function Post() {
                     }
                 </p>
             </Container>
-            <Button content={inEditMode ? 'Submit Changes' : 'Edit'} labelPosition='left' icon='edit' primary onClick={handleClickEditPost} />
+            <Button content={inEditMode ? 'Submit Changes' : 'Edit'} labelPosition='left' icon='edit' primary onClick={inEditMode ? handleSubmitChange : handleClickEditPost} />
             {inEditMode && <Button content='Cancel Edit' labelPosition='left' icon='cancel' secondary onClick={handleClickEditPost} />}
             <Button content='Delete Post' labelPosition='left' icon='trash' secondary />
 
