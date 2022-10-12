@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CommentContainer from "./CommentContainer";
 import { Container, Header, Button } from "semantic-ui-react";
 import { useLocation, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function Post({ posts, setPosts }) {
     const { id } = useParams();
@@ -9,6 +10,7 @@ export default function Post({ posts, setPosts }) {
     const { postID, postTitle, postBody } = location.state;
     const [inEditMode, setInEditMode] = useState(false)
     const [editedBody, setEditedBody] = useState({ body: postBody })
+    const navigate = useNavigate();
 
     function handleClickEditPost() {
         setInEditMode((inEditMode) => !inEditMode)
@@ -38,6 +40,7 @@ export default function Post({ posts, setPosts }) {
                 })
                 const updatedPost = await res.json();
                 updatePost(updatedPost)
+                if (res.ok) navigate("/")
             })()
         } catch(error) {
             console.log(error)
