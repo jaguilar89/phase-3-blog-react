@@ -5,33 +5,33 @@ import { useLocation, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 export default function Post({ posts, setPosts }) {
-    const { id } = useParams();
     const location = useLocation();
     const { postID, postTitle, postBody } = location.state;
     const [inEditMode, setInEditMode] = useState(false)
     const [editedBody, setEditedBody] = useState({ body: postBody })
     const navigate = useNavigate();
+    const id = postID;
 
     function handleClickEditPost() {
         setInEditMode((inEditMode) => !inEditMode)
     }
 
     function updatePost(updatedPost) {
-        const updated = posts.map((post) => {
+        const updatedPostList = posts.map((post) => {
             if (updatedPost.id === post.id) {
                 return updatedPost
             } else {
                 return post
             }
         });
-        setPosts(updated)
+        setPosts(updatedPostList)
     }
 
-    async function handleSubmitChange(e) {
+    function handleSubmitEdit(e) {
         e.preventDefault();
         try {
             (async () => {
-                const res = await fetch(`http://localhost:9292/posts/${postID}`, {
+                const res = await fetch(`http://localhost:9292/posts/${id}`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json"
@@ -53,6 +53,26 @@ export default function Post({ posts, setPosts }) {
             ...editedBody,
             [name]: value
         })
+    };
+
+    function handleDeletePost(deletedPost) {
+        const updatedPosts = posts.filter((post) => post.id !== deletedPost.id)
+        setPosts(updatedPosts)
+    }
+
+    function handleClickDelete() {
+        try {
+            (async () => {
+                const res = await fetch(`http://localhost:9292/posts/${id}`, {
+                    method: "DELETE"
+                })
+                const deletedPost = await res.json()
+                handleDeletePost(deletedPost)
+                if (res.ok) navigate("/")
+            })()
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -73,9 +93,9 @@ export default function Post({ posts, setPosts }) {
                     }
                 </p>
             </Container>
-            <Button content={inEditMode ? 'Submit Changes' : 'Edit'} labelPosition='left' icon='edit' primary onClick={inEditMode ? handleSubmitChange : handleClickEditPost} />
+            <Button content={inEditMode ? 'Submit Changes' : 'Edit'} labelPosition='left' icon='edit' primary onClick={inEditMode ? handleSubmitEdit : handleClickEditPost} />
             {inEditMode && <Button content='Cancel Edit' labelPosition='left' icon='cancel' secondary onClick={handleClickEditPost} />}
-            <Button content='Delete Post' labelPosition='left' icon='trash' secondary />
+            <Button content='Delete Post' labelPosition='left' icon='trash' secondary onClick={handleClickDelete} />
 
             <Header size="huge">Comments</Header>
 
