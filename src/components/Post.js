@@ -14,6 +14,17 @@ export default function Post({ posts, setPosts }) {
         setInEditMode((inEditMode) => !inEditMode)
     }
 
+    function updatePost(updatedPost) {
+        const updated = posts.map((post) => {
+            if (updatedPost.id === post.id) {
+                return updatedPost
+            } else {
+                return post
+            }
+        });
+        setPosts(updated)
+    }
+
     async function handleSubmitChange(e) {
         e.preventDefault();
         try {
@@ -26,12 +37,12 @@ export default function Post({ posts, setPosts }) {
                     body: JSON.stringify(editedBody)
                 })
                 const updatedPost = await res.json();
-
+                updatePost(updatedPost)
             })()
         } catch(error) {
             console.log(error)
         }
-    }
+    };
 
     function handleChange(e) {
         const { name, value } = e.target;

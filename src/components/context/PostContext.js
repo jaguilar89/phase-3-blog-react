@@ -11,7 +11,7 @@ function PostContextProvider({ children }) {
             const postList = await res.json()
             setPosts(postList)
         })()
-    }, [])
+    }, [posts])
 
     return <PostContext.Provider value={{posts, setPosts}}>{children}</PostContext.Provider>
 }
