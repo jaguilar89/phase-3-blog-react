@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useState } from "react";
 import NewPostForm from "./NewPostForm";
-import Post from "./Post";
 import { Link } from "react-router-dom";
 import { Header, Button } from "semantic-ui-react";
 
@@ -20,7 +18,7 @@ export default function PostContainer({ posts, setPosts }) {
     const displayedPosts = posts.map((post) => (
         <li key={post.id}>
             <Link to=
-                {`/posts/${post.id}`}
+                {`/posts/${post.id}`} //////////////////
                 state={{
                     postID: post.id,
                     postTitle: post.title,

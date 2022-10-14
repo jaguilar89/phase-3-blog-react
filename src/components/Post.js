@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import CommentContainer from "./CommentContainer";
 import { Container, Header, Button } from "semantic-ui-react";
-import { useLocation, useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Post({ posts, setPosts }) {
     const location = useLocation();
@@ -10,7 +9,7 @@ export default function Post({ posts, setPosts }) {
     const [inEditMode, setInEditMode] = useState(false)
     const [editedBody, setEditedBody] = useState({ body: postBody })
     const navigate = useNavigate();
-    const id = postID;
+
 
     function handleClickEditPost() {
         setInEditMode((inEditMode) => !inEditMode)
@@ -31,7 +30,7 @@ export default function Post({ posts, setPosts }) {
         e.preventDefault();
         try {
             (async () => {
-                const res = await fetch(`http://localhost:9292/posts/${id}`, {
+                const res = await fetch(`http://localhost:9292/posts/${postID}}`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json"
@@ -63,7 +62,7 @@ export default function Post({ posts, setPosts }) {
     function handleClickDelete() {
         try {
             (async () => {
-                const res = await fetch(`http://localhost:9292/posts/${id}`, {
+                const res = await fetch(`http://localhost:9292/posts/${postID}`, {
                     method: "DELETE"
                 })
                 const deletedPost = await res.json()
@@ -99,7 +98,7 @@ export default function Post({ posts, setPosts }) {
 
             <Header size="huge">Comments</Header>
 
-            <CommentContainer />
+            <CommentContainer postID={postID}/>
         </div>
     )
 }

@@ -1,19 +1,21 @@
 import React from "react";
 import { Button, Comment, Form, Header } from 'semantic-ui-react'
 
-export default function PostComment() {
+export default function PostComment({ name, comment }) {
+    console.log(name)
+    console.log(comment)
     return (
         <>
             <Comment.Group>
                 <Comment>
                     <Comment.Content>
-                        <Comment.Author>Joe Schmoe</Comment.Author>
+                        <Comment.Author>{name}</Comment.Author>
                         <Comment.Metadata>
                             <div>1 day ago</div>
                         </Comment.Metadata>
                         <Comment.Text>
                             <p>
-                                This is a comment.
+                                {comment}
                             </p>
                         </Comment.Text>
                     </Comment.Content>
