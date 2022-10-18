@@ -1,9 +1,7 @@
 import React from "react";
-import { Button, Comment, Form, Header } from 'semantic-ui-react'
+import { Comment } from 'semantic-ui-react'
 
 export default function PostComment({ name, comment }) {
-    console.log(name)
-    console.log(comment)
     return (
         <>
             <Comment.Group>

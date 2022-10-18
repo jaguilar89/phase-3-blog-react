@@ -7,7 +7,7 @@ function PostContextProvider({ children }) {
 
     useEffect(() => {
         (async () => {
-            const res = await fetch('http://localhost:9292/posts')
+            const res = await fetch('http://localhost:9292/posts/')
             const postList = await res.json()
             setPosts(postList)
         })()

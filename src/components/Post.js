@@ -30,7 +30,7 @@ export default function Post({ posts, setPosts }) {
         e.preventDefault();
         try {
             (async () => {
-                const res = await fetch(`http://localhost:9292/posts/${postID}}`, {
+                const res = await fetch(`http://localhost:9292/posts/${postID}`, {
                     method: "PATCH",
                     headers: {
                         "Content-Type": "application/json"
@@ -95,8 +95,6 @@ export default function Post({ posts, setPosts }) {
             <Button content={inEditMode ? 'Submit Changes' : 'Edit'} labelPosition='left' icon='edit' primary onClick={inEditMode ? handleSubmitEdit : handleClickEditPost} />
             {inEditMode && <Button content='Cancel Edit' labelPosition='left' icon='cancel' secondary onClick={handleClickEditPost} />}
             <Button content='Delete Post' labelPosition='left' icon='trash' secondary onClick={handleClickDelete} />
-
-            <Header size="huge">Comments</Header>
 
             <CommentContainer postID={postID}/>
         </div>

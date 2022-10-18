@@ -25,7 +25,7 @@ export default function CommentContainer({ postID }) {
     return (
         <>
             {commentsDisplay}
-            <CommentForm />
+            <CommentForm postID={postID} comments={comments} setComments={setComments} />
         </>
     )
 }
