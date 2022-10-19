@@ -28,8 +28,7 @@ export default function CommentForm({ postID, comments, setComments }) {
                 body: JSON.stringify(commentData)
             })
             const newComment = await res.json();
-            console.log(newComment)
-            //setComments([...comments, newComment])
+            setComments([...comments, newComment])
         } catch (error) {
             console.log(error)
         }

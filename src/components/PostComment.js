@@ -1,7 +1,9 @@
 import React from "react";
 import { Comment } from 'semantic-ui-react'
 
-export default function PostComment({ name, comment }) {
+export default function PostComment({ name, comment, createdAt }) {
+    const date = new Date(createdAt).toLocaleString();
+
     return (
         <>
             <Comment.Group>
@@ -9,7 +11,7 @@ export default function PostComment({ name, comment }) {
                     <Comment.Content>
                         <Comment.Author>{name}</Comment.Author>
                         <Comment.Metadata>
-                            <div>1 day ago</div>
+                            <div>{date}</div>
                         </Comment.Metadata>
                         <Comment.Text>
                             <p>

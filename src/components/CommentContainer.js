@@ -19,6 +19,7 @@ export default function CommentContainer({ postID }) {
             key={comment.id}
             name={comment.name}
             comment={comment.body}
+            createdAt={comment.created_at}
         />
     ))
 
