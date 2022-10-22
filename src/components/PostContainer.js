@@ -18,7 +18,7 @@ export default function PostContainer({ posts, setPosts }) {
     const displayedPosts = posts.map((post) => (
         <li key={post.id}>
             <Link to=
-                {`/posts/${post.id}`} //////////////////
+                {`/posts/${post.id}`}
                 state={{
                     postID: post.id,
                     postTitle: post.title,
@@ -32,7 +32,7 @@ export default function PostContainer({ posts, setPosts }) {
 
     return (
         <div id="post-container">
-            <Header size="huge">Post Container</Header>
+            <Header size="huge">Posts</Header>
             <Button content={formIsShown ? 'Close' : 'Add New Post'} labelPosition='left' icon='pencil alternate' primary onClick={handleShowForm} />
             {formIsShown && <NewPostForm onSubmitPost={handleAddPost} />}
             {displayedPosts}
