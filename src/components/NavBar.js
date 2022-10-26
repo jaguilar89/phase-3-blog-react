@@ -7,7 +7,6 @@ export default function NavBar() {
             <ul>
                 <li>
                     <NavLink to="/">Home</NavLink>
-                    <NavLink to="about">About</NavLink>
                 </li>
             </ul>
         </nav>
