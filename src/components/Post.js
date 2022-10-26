@@ -41,7 +41,7 @@ export default function Post({ posts, setPosts }) {
                 updatePost(updatedPost)
                 if (res.ok) navigate("/")
             })()
-        } catch(error) {
+        } catch (error) {
             console.log(error)
         }
     };
@@ -92,11 +92,12 @@ export default function Post({ posts, setPosts }) {
                     }
                 </p>
             </Container>
-            <Button content={inEditMode ? 'Submit Changes' : 'Edit'} labelPosition='left' icon='edit' primary onClick={inEditMode ? handleSubmitEdit : handleClickEditPost} />
-            {inEditMode && <Button content='Cancel Edit' labelPosition='left' icon='cancel' secondary onClick={handleClickEditPost} />}
-            <Button content='Delete Post' labelPosition='left' icon='trash' secondary onClick={handleClickDelete} />
-
-            <CommentContainer postID={postID}/>
+            <div className="buttons">
+                <Button content={inEditMode ? 'Submit Changes' : 'Edit'} labelPosition='left' icon='edit' primary onClick={inEditMode ? handleSubmitEdit : handleClickEditPost} />
+                {inEditMode && <Button content='Cancel Edit' labelPosition='left' icon='cancel' secondary onClick={handleClickEditPost} />}
+                <Button content='Delete Post' labelPosition='left' icon='trash' secondary onClick={handleClickDelete} />
+            </div>
+            <CommentContainer postID={postID} />
         </div>
     )
 }
