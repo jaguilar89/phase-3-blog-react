@@ -38,9 +38,6 @@ export default function CommentForm({ postID, comments, setComments }) {
     return (
         <>
             <Comment.Group>
-                <Header as="h3" dividing>
-                    Comments
-                </Header>
                 <Form reply onSubmit={handleSubmitComment}>
                     <Form.Field>
                         <input name="name" placeholder="Name" onChange={handleChange} />
