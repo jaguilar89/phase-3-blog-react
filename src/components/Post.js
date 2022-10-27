@@ -78,7 +78,7 @@ export default function Post({ posts, setPosts }) {
         <div className="post">
             <Container text>
                 <Header as='h1'>{postTitle}</Header>
-                <p>
+                <>
                     {inEditMode ?
                         <textarea
                             name='body'
@@ -90,7 +90,7 @@ export default function Post({ posts, setPosts }) {
                         :
                         postBody
                     }
-                </p>
+                </>
             </Container>
             <div className="buttons">
                 <Button content={inEditMode ? 'Submit Changes' : 'Edit'} labelPosition='left' icon='edit' primary onClick={inEditMode ? handleSubmitEdit : handleClickEditPost} />
