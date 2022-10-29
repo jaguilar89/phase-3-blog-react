@@ -16,16 +16,10 @@ You can create a blog post as well as post comments on an individual blog post, 
 $ git clone git@github.com:*username*/phase-3-blog-react.git
 ```
 
-- `cd` into the repository and install the required dependencies
+- `cd` into the repository and install the required dependencies, then start up the app
 
 ```bash
-$ npm install
-```
-
-- Start the app
-  
-```bash
-$ npm start
+$ npm install && npm start
 ```
 The app runs on port 3000 by default, you can view the page by going to http://localhost:3000 in your browser.
 
@@ -44,7 +38,7 @@ $ bundle install
 - Seed the local database with some example data
 
 ```bash
-$ bundle rake db:seed
+$ bundle exec rake db:seed
 ```
 
 - Start the server
