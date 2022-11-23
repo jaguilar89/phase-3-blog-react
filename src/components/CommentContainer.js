@@ -9,9 +9,9 @@ export default function CommentContainer({ postID }) {
 
     useEffect(() => {
         (async () => {
-            const res = await fetch(`http://localhost:9292/comments/${postID}`)
-            const commentList = await res.json()
-            setComments(commentList)
+            const res = await fetch(`http://localhost:9292/posts/${postID}`)
+            const post = await res.json()
+            setComments(post.comments)
         })()
     }, [])
 
